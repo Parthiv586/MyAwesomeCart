@@ -2,18 +2,37 @@
 {% block title%} My Awesome Cart Tracker{% endblock %}
 {% block body %}
 <div class="container">
-    {{response}}
+
+
     <div class="col my-4">
 
         <h2>Payment status regarding your order Id {{response.ORDERID}}</h2>
         {% if response.RESPCODE == '01' %}
-        ORDER SUCCESS
-        {% else %}
-        ORDER FAILURE
+        <strong>&checkmark; Your order has been successfully placed.</strong>
+        <h2>All Payment Details:</h2>
+        Payment Id: {{response.TXNID}}<br>
+        Payment Amount:{{ response.TXNAMOUNT }}<br>
+        Payment Currency:{{ response.CURRENCY }}<br>
+        Bank Name:{{ response.BANKNAME }}<br>
+        BankId: {{ response.BANKTXNID }}<br>
+        Payment Date & Time:{{ response.TXNDATE }}<br>
+        Payment Mode:{{ response.PAYMENTMODE }}<br>
+        <script>localStorage.clear();</script>
+        {% else %} <strong>
+            &bigotimes; ORDER FAILURE</strong>
         {% endif%}
 
     </div>
 
+    <!-- {{response}} -->
+    <h2>All Payment Details:</h2>
+    Payment Id: {{response.TXNID}}<br>
+    Payment Amount:{{ response.TXNAMOUNT }}<br>
+    Payment Currency:{{ response.CURRENCY }}<br>
+    Bank Name:{{ response.BANKNAME }}<br>
+    BankId: {{ response.BANKTXNID }}<br>
+    Payment Date & Time:{{ response.TXNDATE }}<br>
+    Payment Mode:{{ response.PAYMENTMODE }}<br>
 </div>
 {% endblock %}
 {% block js %}
